@@ -21,13 +21,17 @@
 </template>
 
 <template name="UsersFoodStorage">
-  <div class="FoodStorage span7">
-    {{> AddFoodStorageTemplate}}
-    <h2>My Food Storage: </h2>
-    {{#each FoodStorageOptions}}
-      {{> FoodStorageOption}} <br>
-    {{/each}}
-  </div>
+  {{#if LoggedIn}}
+    <div class="FoodStorage span7">
+      {{> AddFoodStorageTemplate}}
+      <h2>My Food Storage: </h2>
+      {{#each FoodStorageOptions}}
+        {{> FoodStorageOption}} <br>
+      {{/each}}
+    </div>
+  {{else}}
+    <h2>Sign in to start tracking your food storage!</h2>
+  {{/if}}
 </template>
 
 <template name="AddFoodStorageTemplate">

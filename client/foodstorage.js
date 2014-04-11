@@ -1,5 +1,6 @@
 Deps.autorun(function () {
     Meteor.subscribe("userData");
+    Meteor.subscribe("foodstorageoptions");
 });
 FoodStorageOptions = new Meteor.Collection("foodstorageoptions");
 
@@ -9,14 +10,9 @@ Template.UsersFoodStorage.FoodStorageOptions = function () {
     return Meteor.user().FoodStorageOptions;
 };
 
-Template.UsersFoodStorage.selected_item = function () {
-  var selectedItem = FoodStorageOptions.findOne(Session.get("selected_item"));
-  return selectedItem && selectedItem.name;
-};
-
-Template.FoodStorageOption.selected = function () {
-  return Session.equals("selected_item", this._id) ? "selected" : '';
-};
+Template.UsersFoodStorage.LoggedIn = function () {
+  return (Meteor.user() != null);
+}
 
 Template.AddFoodStorageTemplate.rendered = function() {
   $('#FoodStorageSelect').select2({
