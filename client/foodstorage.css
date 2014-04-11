@@ -1,62 +1,41 @@
 body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 200;
-    margin: 50px 0;
-    padding: 0;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -o-user-select: none;
-    user-select: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 200;
+  padding: 0;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 
-#outer {
-    width: 600px;
-    margin: 0 auto;
+.main-header
+{
+  padding: 10px;
+  margin: 0px;
+  border: 0px solid #ffffff;
+  background: aliceblue;
+  background-size: 210px 80px;
 }
 
-.player {
-    cursor: pointer;
-    padding: 5px;
+.header-right
+{
+  float: right;
+  height: 90px;
+  vertical-align: bottom;
 }
 
-.player .name {
-    display: inline-block;
-    width: 300px;
-    font-size: 1.75em;
+.AddFoodStorage 
+{
+  padding: 10px;
 }
 
-.player .score {
-    display: inline-block;
-    width: 100px;
-    text-align: right;
-    font-size: 2em;
-    font-weight: bold;
-    color: #777;
+.AddFoodStorage div 
+{
+  margin: 0px 11px;
 }
 
-.player.selected {
-    background-color: yellow;
-}
-
-.player.selected .score {
-    color: black;
-}
-
-.details, .none {
-    font-weight: bold;
-    font-size: 2em;
-    border-style: dashed none none none;
-    border-color: #ccc;
-    border-width: 4px;
-    margin: 50px 10px;
-    padding: 10px 0px;
-}
-
-.none {
-    color: #777;
-}
-
-.inc {
-  cursor: pointer;
+input
+{
+  margin: 0 4px;
 }

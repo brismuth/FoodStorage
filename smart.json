@@ -1,0 +1,8 @@
+{
+  "packages": {
+    "select2": {},
+    "jquery-ui": {},
+    "jquery-ui-bootstrap": {},
+    "font-awesome": {}
+  }
+}

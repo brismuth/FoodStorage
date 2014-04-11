@@ -1,34 +1,50 @@
 <head>
-  <title>Leaderboard</title>
+  <title>Food Storage</title>
 </head>
 
 <body>
-  <div id="outer">
-    {{> leaderboard}}
-  </div>
+    {{> FoodStorage}}
 </body>
 
-<template name="leaderboard">
-  <div class="leaderboard">
-    {{#each players}}
-      {{> player}}
+<template name="FoodStorage">
+  {{> MainHeader}}
+  {{> UsersFoodStorage}}
+</template>
+
+<template name="MainHeader">
+  <div class="main-header">
+    <a href="/"><!---<img id="logo" src="logo.png" />-->Food Storage Organizer</a>
+    <div class="header-right">
+      {{> loginButtons align="right"}}
+    </div>
+  </div>
+</template>
+
+<template name="UsersFoodStorage">
+  <div class="FoodStorage span7">
+    {{> AddFoodStorageTemplate}}
+    <h2>My Food Storage: </h2>
+    {{#each FoodStorageOptions}}
+      {{> FoodStorageOption}} <br>
     {{/each}}
   </div>
-
-  {{#if selected_name}}
-  <div class="details">
-    <div class="name">{{selected_name}}</div>
-    <input type="button" class="inc" value="Give 5 points" />
-  </div>
-  {{else}}
-  <div class="none">Click a player to select</div>
-  {{/if}}
 </template>
 
-<template name="player">
-  <div class="player {{selected}}">
+<template name="AddFoodStorageTemplate">
+  <div class="AddFoodStorage well">
+    <div style="font-weight:bold;margin-left: 12px;"> Add to your food storage: </div>
+    <input type="text" class="span2 front-field" placeholder="Select Food" name="FoodStorageSelect" id="FoodStorageSelect" /> 
+    <input type="text" class="span2" placeholder="Expiration Date" id="ExpDatePicker">
+    <input type="text" placeholder="Note (optional)" name="FoodStorageNote" id="FoodStorageNote" />
+    <i id="AddStorageButton" class="fa fa-plus" style="font-size: 2em;color: green;"></i>
+  </div>
+</template>
+
+<template name="FoodStorageOption">
+  <div class="FoodStorageOption{{selected}}">
+    <span class="image">{{image}}</span>
     <span class="name">{{name}}</span>
-    <span class="score">{{score}}</span>
+    <span class="expiration">Expiring: {{exp}}</span>
+    <span class="note">Note: {{note}}</span>
   </div>
 </template>
-

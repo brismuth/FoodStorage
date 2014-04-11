@@ -1,29 +1,52 @@
-// Set up a collection to contain player information. On the server,
-// it is backed by a MongoDB collection named "players".
+Deps.autorun(function () {
+    Meteor.subscribe("userData");
+});
+FoodStorageOptions = new Meteor.Collection("foodstorageoptions");
 
-Players = new Meteor.Collection("players");
 
-Template.leaderboard.players = function () {
-  return Players.find({}, {sort: {score: -1, name: 1}});
+Template.UsersFoodStorage.FoodStorageOptions = function () {
+  if (Meteor.user() && Meteor.user().FoodStorageOptions)
+    return Meteor.user().FoodStorageOptions;
 };
 
-Template.leaderboard.selected_name = function () {
-  var player = Players.findOne(Session.get("selected_player"));
-  return player && player.name;
+Template.UsersFoodStorage.selected_item = function () {
+  var selectedItem = FoodStorageOptions.findOne(Session.get("selected_item"));
+  return selectedItem && selectedItem.name;
 };
 
-Template.player.selected = function () {
-  return Session.equals("selected_player", this._id) ? "selected" : '';
+Template.FoodStorageOption.selected = function () {
+  return Session.equals("selected_item", this._id) ? "selected" : '';
 };
 
-Template.leaderboard.events({
-  'click input.inc': function () {
-    Players.update(Session.get("selected_player"), {$inc: {score: 5}});
+Template.AddFoodStorageTemplate.rendered = function() {
+  $('#FoodStorageSelect').select2({
+      query: function (query) {
+          var data = {results: []}, i, j, s;
+          var regex = new RegExp(query.term, 'i');
+          Meteor.subscribe ('foodstorageoptions');
+          data.results = FoodStorageOptions.find({'name': regex}).fetch();
+          data.results.forEach(function(element, index, array) {
+            element.id = element._id;
+            element.text = element.name;
+          });
+          query.callback(data);
+      }
+  });
+
+  $('#FoodStorageSelect').select2("enable", true);
+  $('#ExpDatePicker').datepicker();
+}
+
+Template.AddFoodStorageTemplate.events({
+  'click #AddStorageButton' : function (evt) {
+    var foodStorageID = $('#FoodStorageSelect').val();
+    var expirationDate = $('#ExpDatePicker').val();
+    var note = $('#FoodStorageNote').val();
+    Meteor.call("addFoodStorage", Meteor.userId(), foodStorageID, expirationDate, note);
   }
 });
 
-Template.player.events({
-  'click': function () {
-    Session.set("selected_player", this._id);
-  }
-});
+
+
+
+

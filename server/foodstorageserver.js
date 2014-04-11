@@ -1,16 +1,57 @@
-Players = new Meteor.Collection("players");
+FoodStorageOptions = new Meteor.Collection("foodstorageoptions");
 
-// On server startup, create some players if the database is empty.
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    if (Players.find().count() === 0) {
-      var names = ["Grace Hopper",
-                   "Marie Curie",
-                   "Carl Friedrich Gauss",
-                   "Nikola Tesla",
-                   "Claude Shannon"];
-      for (var i = 0; i < names.length; i++)
-        Players.insert({name: names[i], score: Math.floor(Random.fraction()*10)*5});
-    }
-  });
-}
+// server: publish the rooms collection, minus secret info.
+Meteor.publish("foodstorageoptions", function () {
+  return FoodStorageOptions.find({});
+});
+
+Meteor.publish("userData", function () {
+    return Meteor.users.find({_id: this.userId},
+        {fields: {'FoodStorageOptions': 1}});
+});
+
+Meteor.methods({
+  addFoodStorage: function (userID, foodStorageID, expirationDate, note) {
+    var foodStorageOption = FoodStorageOptions.findOne({_id: foodStorageID});
+
+    Meteor.users.update({
+      _id: userID,
+    }, {
+      $push: {
+        'FoodStorageOptions' : {
+          name: foodStorageOption.name,
+          image: foodStorageOption.image,
+        	exp: expirationDate, 
+        	note: note
+        }
+      }
+    }, function(error, affectedDocs) {
+      if (error) {
+        throw new Meteor.Error(500, error.message);
+      } else {
+        return "Update Successful";
+      }
+    });
+  },
+
+	removeFoodStorage: function (userID, foodStorageID, expirationDate, note) {
+    Meteor.users.update({
+      _id: userID,
+    }, {
+      $push: {
+        'foodStorage' : {
+        	foodStorageID: foodStorageID, 
+        	expirationDate: expirationDate, 
+        	note: note
+        }
+      }
+    }, function(error, affectedDocs) {
+      if (error) {
+        throw new Meteor.Error(500, error.message);
+      } else {
+        return "Update Successful";
+      }
+    });
+  }
+
+});
