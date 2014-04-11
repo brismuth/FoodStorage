@@ -41,8 +41,11 @@ Template.AddFoodStorageTemplate.events({
   'click #AddStorageButton' : function (evt) {
     var foodStorageID = $('#FoodStorageSelect').val();
     var expirationDate = $('#ExpDatePicker').val();
-    var note = $('#FoodStorageNote').val();
-    Meteor.call("addFoodStorage", Meteor.userId(), foodStorageID, expirationDate, note);
+    if (foodStorageID !== "" && expirationDate !== "") //make sure something is selected
+    {
+      var note = $('#FoodStorageNote').val();
+      Meteor.call("addFoodStorage", Meteor.userId(), foodStorageID, expirationDate, note);
+    }
   }
 });
 
