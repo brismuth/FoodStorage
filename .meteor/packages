@@ -9,7 +9,6 @@ bootstrap
 accounts-google
 accounts-base
 accounts-password
-accounts-twitter
 accounts-ui
 jquery
 select2
