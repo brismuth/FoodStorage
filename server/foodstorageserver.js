@@ -13,21 +13,21 @@ Meteor.publish("userData", function () {
 // fill out the food storage options collection
 Meteor.startup(function () {
   var foodstorageoptions = [
-    {_id:"Wheat",name:"Wheat",image:"Wheat.svg"},
-    {_id:"Flour",name:"Flour",image:"Flour.svg"},
-    {_id:"Oats",name:"Oats",image:"Oats.svg"},
-    {_id:"Rice",name:"Rice",image:"Rice.svg"},
-    {_id:"Pasta",name:"Pasta",image:"Pasta.svg"},
-    {_id:"VegetableOil",name:"Vegetable Oil",image:"VegetableOil.svg"},
-    {_id:"PeanutButter",name:"Peanut Butter",image:"PeanutButter.svg"},
-    {_id:"Beans",name:"Beans",image:"Beans.svg"},
-    {_id:"Honey",name:"Honey",image:"Honey.svg"},
-    {_id:"Sugar",name:"Sugar",image:"Sugar.svg"},
-    {_id:"Jams",name:"Jams",image:"Jams.svg"},
-    {_id:"DryMilk",name:"Dry Milk",image:"DryMilk.svg"},
-    {_id:"Salt",name:"Salt",image:"Salt.svg"},
-    {_id:"Vinegar",name:"Vinegar",image:"Vinegar.svg"},
-    {_id:"Water",name:"Water",image:"Water.svg"}
+    {_id:"Wheat",name:"Wheat",image:"storage/wheat.png"},
+    {_id:"Flour",name:"Flour",image:"storage/flour.png"},
+    {_id:"Oats",name:"Oats",image:"storage/oats.png"},
+    {_id:"Rice",name:"Rice",image:"storage/rice.png"},
+    {_id:"Pasta",name:"Pasta",image:"storage/pasta.png"},
+    {_id:"VegetableOil",name:"Vegetable Oil",image:"storage/vegetableoil.png"},
+    {_id:"PeanutButter",name:"Peanut Butter",image:"storage/peanutbutter.png"},
+    {_id:"Beans",name:"Beans",image:"storage/beans.png"},
+    {_id:"Honey",name:"Honey",image:"storage/honey.png"},
+    {_id:"Sugar",name:"Sugar",image:"storage/sugar.png"},
+    {_id:"Jams",name:"Jams",image:"storage/berries.png"},
+    {_id:"DryMilk",name:"Dry Milk",image:"storage/drymilk.png"},
+    {_id:"Salt",name:"Salt",image:"storage/salt.png"},
+    {_id:"Vinegar",name:"Vinegar",image:"storage/vinegar.png"},
+    {_id:"Water",name:"Water",image:"storage/water.png"}
   ];
   FoodStorageOptions.remove({});
   for (var i = 0; i < foodstorageoptions.length; i++)
