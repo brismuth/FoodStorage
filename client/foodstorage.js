@@ -4,6 +4,7 @@ Deps.autorun(function () {
 });
 FoodStorageOptions = new Meteor.Collection("foodstorageoptions");
 
+Meteor.absoluteUrl.defaultOptions.rootUrl = "http://foodstoragefriend.com/"
 
 Template.AddFoodStorageTemplate.rendered = function() {
   $('#FoodStorageSelect').select2({
