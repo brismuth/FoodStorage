@@ -6,7 +6,6 @@
 standard-app-packages
 insecure
 bootstrap
-accounts-google
 accounts-base
 accounts-password
 accounts-ui
