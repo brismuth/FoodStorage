@@ -25,17 +25,112 @@ body {
   vertical-align: bottom;
 }
 
+.main-content
+{
+  width: 100%;
+}
+
+.FoodStorage
+{
+  padding: 0 15px;
+  margin: 10px auto;
+  float: none;
+}
+
 .AddFoodStorage 
 {
-  padding: 10px;
+  padding: 3px 7px 0 7px;
+  margin: 10px auto;
+  float: none;
+  width: 492px;
 }
 
-.AddFoodStorage div 
+.AddFoodStorage .food-select
 {
-  margin: 0px 11px;
+  margin-top: -11px;
+  width: 128px;
 }
 
-input
+.AddFoodStorage .expiration
 {
-  margin: 0 4px;
+  margin-left: 10px;
+  width: 75px;
+}
+
+.AddFoodStorage .note
+{
+  margin-left: 10px;
+}
+
+.AddFoodStorage .add-button
+{
+  margin-left: 10px;
+}
+
+.FoodStorageObject
+{
+  float: left;
+  background-color: aliceblue;
+  margin: 6px;  
+  border-radius: 4px;
+  padding: 5px;
+  border: 1px solid lightblue;
+  width: 250px;
+  height: 80px;
+}
+
+.FoodStorageObject .image
+{
+  float: left;
+}
+
+.FoodStorageObject .description
+{
+  float: right;
+  width: 180px;
+}
+
+.FoodStorageObject .description .name
+{
+  font-weight: bold;
+  font-size: 120%;
+}
+
+.FoodStorageObject .expiring
+{
+  color: red;
+}
+
+.FoodStorageObject .description .note
+{
+  overflow: auto;
+  width: 170px;
+  height: 40px;
+  padding-right: 15px;
+}
+
+.FoodStorageObject .delete 
+{
+  display: none;
+  float: right;
+  margin-top: -3px;
+  margin-right: -183px;
+  cursor: pointer;
+  color: #fff;
+  border: 1px solid #AEAEAE;
+  border-radius: 30px;
+  background: darkred;
+  font-size: 31px;
+  line-height: 0px;
+  padding: 6px 3px 10px 3px;     
+}
+
+.FoodStorageObject:hover .delete 
+{
+  display: block;
+}
+
+.FoodStorageObject .delete:before 
+{
+  content: "-";
 }

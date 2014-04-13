@@ -5,15 +5,6 @@ Deps.autorun(function () {
 FoodStorageOptions = new Meteor.Collection("foodstorageoptions");
 
 
-Template.UsersFoodStorage.FoodStorageOptions = function () {
-  if (Meteor.user() && Meteor.user().FoodStorageOptions)
-    return Meteor.user().FoodStorageOptions;
-};
-
-Template.UsersFoodStorage.LoggedIn = function () {
-  return (Meteor.user() != null);
-}
-
 Template.AddFoodStorageTemplate.rendered = function() {
   $('#FoodStorageSelect').select2({
       query: function (query) {
@@ -41,11 +32,43 @@ Template.AddFoodStorageTemplate.events({
     {
       var note = $('#FoodStorageNote').val();
       Meteor.call("addFoodStorage", Meteor.userId(), foodStorageID, expirationDate, note);
+      $('#ExpDatePicker').val("");
+      $('#FoodStorageNote').val("");
     }
   }
 });
 
+var dateParser = /^(\d{2})[\/\- ](\d{2})[\/\- ](\d{4})/;
+Template.FoodStorageObjects.FoodStorageObjects = function () {
+  function expCompare(a,b){
+    dateA = a.exp.replace(dateParser,"$3$1$2");
+    dateB = b.exp.replace(dateParser,"$3$1$2");
+    if (dateA>dateB) return 1;
+    if (dateA<dateB) return -1;
+    return 0; 
+  }
 
+  if (Meteor.user() && Meteor.user().FoodStorageObjects)
+    return Meteor.user().FoodStorageObjects.sort(expCompare);
+};
 
+Template.UsersFoodStorage.LoggedIn = function () {
+  return (Meteor.user() != null);
+}
 
+Template.FoodStorageObject.HasNote = function () {
+  return this.note !== "";
+}
 
+Template.FoodStorageObject.CloseToExpiration = function () {
+  var d = new Date();
+  d.setMonth(d.getMonth() + 3);
+  var expiringSoon = d.getFullYear().toString() + ("0" + d.getMonth()).slice(-2) + ("0" + d.getDate()).slice(-2);
+  return this.exp.replace(dateParser,"$3$1$2") < expiringSoon;
+}
+
+Template.FoodStorageObject.events({
+  'click #deleteObject' : function (evt) {
+    Meteor.call("removeFoodStorage", Meteor.userId(), this.uniqueID);
+  }
+});

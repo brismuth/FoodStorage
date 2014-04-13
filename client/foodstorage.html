@@ -21,34 +21,47 @@
 </template>
 
 <template name="UsersFoodStorage">
-  {{#if LoggedIn}}
-    <div class="FoodStorage span7">
-      {{> AddFoodStorageTemplate}}
-      <h2>My Food Storage: </h2>
-      {{#each FoodStorageOptions}}
-        {{> FoodStorageOption}} <br>
-      {{/each}}
-    </div>
-  {{else}}
-    <h2>Sign in to start tracking your food storage!</h2>
-  {{/if}}
+  <div class="main-content">
+    {{#if LoggedIn}}
+      <div class="FoodStorage span12">
+        {{> AddFoodStorageTemplate}}
+        {{> FoodStorageObjects}}
+      </div>
+    {{else}}
+      <h2>Sign in to start tracking your food storage!</h2>
+    {{/if}}
+  </div>
 </template>
 
 <template name="AddFoodStorageTemplate">
   <div class="AddFoodStorage well">
     <div style="font-weight:bold;margin-left: 12px;"> Add to your food storage: </div>
-    <input type="text" class="span2 front-field" placeholder="Select Food" name="FoodStorageSelect" id="FoodStorageSelect" /> 
-    <input type="text" class="span2" placeholder="Expiration Date" id="ExpDatePicker">
-    <input type="text" placeholder="Note (optional)" name="FoodStorageNote" id="FoodStorageNote" />
-    <i id="AddStorageButton" class="fa fa-plus" style="font-size:2em; color:green; cursor:pointer"></i>
+    <input type="text" class="food-select" placeholder="Select Food" name="FoodStorageSelect" id="FoodStorageSelect" /> 
+    <input type="text" class="expiration" placeholder="Expiration" id="ExpDatePicker">
+    <input type="text" class="note" placeholder="Note (i.e., quantity, location, type)" name="FoodStorageNote" id="FoodStorageNote" />
+    <i id="AddStorageButton" class="fa fa-plus add-button" style="font-size:2em; color:green; cursor:pointer"></i>
   </div>
 </template>
 
-<template name="FoodStorageOption">
-  <div class="FoodStorageOption{{selected}}">
-    <span class="image">{{image}}</span>
-    <span class="name">{{name}}</span>
-    <span class="expiration">Expiring: {{exp}}</span>
-    <span class="note">Note: {{note}}</span>
+<template name="FoodStorageObjects">
+  <div class="FoodStorageObjects span12">
+    <h2>My Food Storage: </h2>
+    {{#each FoodStorageObjects}}
+      {{> FoodStorageObject}}
+    {{/each}}
+  </div>
+</template>
+
+<template name="FoodStorageObject">
+  <div class="FoodStorageObject">
+    <img class="image" src="{{image}}" width="70" height="83"/>
+    <div class="description">
+      <div class="name">{{name}}</div>
+      <div class="{{#if CloseToExpiration}}expiring{{/if}}">Expiring: {{exp}}</div>
+      {{#if HasNote}}
+        <div class="note">Note: {{note}}</div>
+      {{/if}}
+    </div>
+    <a class="delete" id="deleteObject" foodStorageId="{{uniqueID}}"></a>
   </div>
 </template>

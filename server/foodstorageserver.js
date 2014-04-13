@@ -7,18 +7,20 @@ Meteor.publish("foodstorageoptions", function () {
 
 Meteor.publish("userData", function () {
     return Meteor.users.find({_id: this.userId},
-        {fields: {'FoodStorageOptions': 1}});
+        {fields: {'FoodStorageObjects': 1}});
 });
 
 Meteor.methods({
   addFoodStorage: function (userID, foodStorageID, expirationDate, note) {
     var foodStorageOption = FoodStorageOptions.findOne({_id: foodStorageID});
+    var uniqueID = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0,v=c=='x'?r:r&0x3|0x8;return v.toString(16);});
 
     Meteor.users.update({
       _id: userID,
     }, {
       $push: {
-        'FoodStorageOptions' : {
+        'FoodStorageObjects' : {
+          uniqueID: uniqueID,
           name: foodStorageOption.name,
           image: foodStorageOption.image,
         	exp: expirationDate, 
@@ -34,15 +36,13 @@ Meteor.methods({
     });
   },
 
-	removeFoodStorage: function (userID, foodStorageID, expirationDate, note) {
+	removeFoodStorage: function (userID, uniqueID) {
     Meteor.users.update({
       _id: userID,
     }, {
-      $push: {
-        'foodStorage' : {
-        	foodStorageID: foodStorageID, 
-        	expirationDate: expirationDate, 
-        	note: note
+      $pull: {
+        'FoodStorageObjects' : {
+        	uniqueID: uniqueID, 
         }
       }
     }, function(error, affectedDocs) {
