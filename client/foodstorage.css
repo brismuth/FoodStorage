@@ -47,7 +47,7 @@ body {
 
 .AddFoodStorage .food-select
 {
-  margin-top: -11px;
+  float: left;
   width: 128px;
 }
 
