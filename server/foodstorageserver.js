@@ -23,7 +23,7 @@ Meteor.startup(function () {
     {_id:"Beans",name:"Beans",image:"storage/beans.png"},
     {_id:"Honey",name:"Honey",image:"storage/honey.png"},
     {_id:"Sugar",name:"Sugar",image:"storage/sugar.png"},
-    {_id:"Jams",name:"Jams",image:"storage/berries.png"},
+    {_id:"Jam",name:"Jam",image:"storage/berries.png"},
     {_id:"DryMilk",name:"Dry Milk",image:"storage/drymilk.png"},
     {_id:"Salt",name:"Salt",image:"storage/salt.png"},
     {_id:"Vinegar",name:"Vinegar",image:"storage/vinegar.png"},

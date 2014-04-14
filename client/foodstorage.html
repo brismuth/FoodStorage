@@ -10,6 +10,7 @@
 <template name="FoodStorage">
   {{> MainHeader}}
   {{> UsersFoodStorage}}
+  {{> MainFooter}}
 </template>
 
 <template name="MainHeader">
@@ -64,5 +65,13 @@
       {{/if}}
     </div>
     <a class="delete" id="deleteObject" foodStorageId="{{uniqueID}}"></a>
+  </div>
+</template>
+
+<template name="MainFooter">
+  <div style="clear:both;"></div>
+  <div class="main-footer">
+    <h4>Did you know?</h4>
+    <p>Louis Pasteur pioneered new techniques in food storage. It is thanks to him that we now pasteurize milk, allowing it to last much longer than otherwise possible.</p>
   </div>
 </template>
