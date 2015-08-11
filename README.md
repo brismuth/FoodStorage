@@ -11,4 +11,4 @@ You can add more items at the top. There is a date picker for the expiration, an
 
 ![Screenshot](https://raw.githubusercontent.com/brismuth/FoodStorage/master/demo/remove.png "Screenshot")
 
-[Meteor](https://www.meteor.com/) uses MongoDB on the backend and manages sockets and realtime data sharing for you. That means that if you have this food storage app open on two computers, changes to one will immediately show up on the other as well.
+[Meteor](https://www.meteor.com/) uses MongoDB on the backend for persistence and manages sockets and realtime data sharing for you. That means that if you are logged into this food storage app on two computers, changes on one will immediately show up on the other as well.
